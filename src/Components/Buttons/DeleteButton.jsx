@@ -24,6 +24,7 @@ const DeleteButton = ({ setUsers, allUsers, user }) => {
 
   return (
     <div className='m-1'>
+    
     <Button variant="danger" onClick={handleShow}>
       Delete Profile
     </Button>

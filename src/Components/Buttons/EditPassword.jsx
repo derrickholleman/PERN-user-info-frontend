@@ -5,10 +5,10 @@ import Modal from "react-bootstrap/Modal";
 const EditPassword = ({ user }) => {
   const [oldPassword, setOldPassword] = useState("");
   const [password, setPassword] = useState('');
-  const [first_name, setFirstName] = useState(user.first_name);
-  const [last_name, setLastName] = useState(user.last_name);
-  const [email, setEmail] = useState(user.email);
-  const [birthday, setBirthday] = useState(user.birthday);
+  const [first_name] = useState(user.first_name);
+  const [last_name] = useState(user.last_name);
+  const [email] = useState(user.email);
+  const [birthday] = useState(user.birthday);
 
 //  REACT BOOTSTRAP MODAL BUTTON FUNCTIONS //
   const handleClose = () => {
@@ -21,7 +21,9 @@ const EditPassword = ({ user }) => {
   const handleShow = () => setShow(true);
 // -------------------------------------- //
 
-// password validation 
+// password validation //
+
+// button disabling
   const isOldPasswordValid = () => {
     if (
       oldPassword === user.password &&
@@ -40,6 +42,7 @@ const EditPassword = ({ user }) => {
       return false;
     }
   };
+  // for dynamic class name on input field
   const isNewPasswordValid = () => {
     if (oldPassword === user.password) {
       return "valid";
@@ -76,10 +79,10 @@ const EditPassword = ({ user }) => {
           <Modal.Title>Change Password</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+        
           <label for="old-password" className="form-label">
             Please Enter Your Old Password
           </label>
-
           <input
             type="password"
             id="old-password"

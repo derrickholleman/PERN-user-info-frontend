@@ -9,6 +9,7 @@ const NewUserForm = () => {
   const [password, setPassword] = useState("");
   const [passwordMatch, setPasswordMatch] = useState("");
 
+  // for button disabling and warning message
   const isPasswordMatching = () => {
     if (password === passwordMatch) {
       return true;
@@ -17,8 +18,8 @@ const NewUserForm = () => {
     }
   };
 
+  // POST request
   const submitForm = async (e) => {
-
       try {
         const body = {first_name, last_name, email, birthday, password}
         await fetch('http://localhost:5000/users', {
