@@ -28,10 +28,10 @@ form {
 }
 /* email form validation */
 input[type="email"]:valid:focus {
-  border: 2px solid green;
+  border: 1px solid green;
 }
 input[type="email"]:invalid:focus {
-  border: 2px solid red;
+  border: 1px solid red;
 }
 
 

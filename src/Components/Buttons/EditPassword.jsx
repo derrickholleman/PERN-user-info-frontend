@@ -4,6 +4,7 @@ import Modal from "react-bootstrap/Modal";
 
 const EditPassword = ({ user }) => {
   const [oldPassword, setOldPassword] = useState("");
+  const [passwordMatch, setPasswordMatch] = useState("");
   const [password, setPassword] = useState("");
   const [first_name] = useState(user.first_name);
   const [last_name] = useState(user.last_name);
@@ -15,6 +16,7 @@ const EditPassword = ({ user }) => {
     // reset fields on close
     setOldPassword("");
     setPassword("");
+    setPasswordMatch("")
     setShow(false);
   };
   const [show, setShow] = useState(false);
@@ -23,7 +25,15 @@ const EditPassword = ({ user }) => {
 
   // password validation //
 
-  // button disabling
+  // button disabling logic
+  const isNewPasswordValid = () => {
+    if (password.length > 0 && oldPassword !== password && password === passwordMatch) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  // for dynamic class name on input field
   const isOldPasswordValid = () => {
     if (oldPassword === user.password) {
       // if old password in field equals current password
@@ -33,24 +43,31 @@ const EditPassword = ({ user }) => {
     }
   };
   const showWarningMessage = () => {
-    // show warning if passwords are the same
-    if (oldPassword.length > 0 && oldPassword === password) {
+    // show warning if passwords are the same and old password field has characters in it
+    if (oldPassword === password && oldPassword.length > 0) {
       return true;
     } else {
       return false;
     }
   };
-  // for dynamic class name on input field
-  const isNewPasswordValid = () => {
-    if (
-      password.length > 0 &&
-      oldPassword !== password
-    ) {
+  // 'passwords must match' warning logic
+  const isPasswordMatching = () => {
+    if (password !== passwordMatch && passwordMatch.length > 0) {
       return true;
     } else {
-      return false;
+      return false
     }
+     
   };
+  // dynamic class for "please enter new password" label
+  const isWarningShowing = () => {
+    // if warning is showing, margin of 0
+    if (oldPassword === password && oldPassword.length > 0) {
+      return ''
+    } else {
+      return 'form-label'
+    }
+  }
 
   // PUT REQUEST
   const editPassword = async (id) => {
@@ -80,8 +97,8 @@ const EditPassword = ({ user }) => {
           <Modal.Title>Change Password</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        
-        {/* old password */}
+
+          {/* old password */}
           <label for="old-password" className="form-label">
             Please Enter Your Old Password
           </label>
@@ -94,24 +111,39 @@ const EditPassword = ({ user }) => {
             onChange={(e) => setOldPassword(e.target.value)}
           />
 
+          <hr />
+
           {/* new password */}
-          <label for="new-password" className="form-label">
+          <label for="new-password" className={`${isWarningShowing()}`}>
             Please Enter Your New Password
           </label>
+          {showWarningMessage() && (
+            <div className="password-warning mb-1">
+              New password can't be the same as old password
+            </div>
+          )}
           <input
             type="password"
             id="new-password"
             required
-            className="form-control"
+            className="form-control mb-4"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          {showWarningMessage() && (
-            <span className="password-warning">
-              Passwords can't be the same
-            </span>
-          )}
+          {/* retype new password */}
+          <label for="password-match" className="form-label">
+            Re-type new password
+          </label>
+          <input
+            type="password"
+            id="password-match"
+            required
+            className="form-control"
+            value={passwordMatch}
+            onChange={(e) => setPasswordMatch(e.target.value)}
+          />
+          {isPasswordMatching() && <span className='password-warning'>(Passwords must match)</span>}
         </Modal.Body>
 
         <Modal.Footer>
