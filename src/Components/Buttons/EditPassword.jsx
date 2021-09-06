@@ -25,17 +25,15 @@ const EditPassword = ({ user }) => {
 
   // button disabling
   const isOldPasswordValid = () => {
-    if (
-      oldPassword === user.password &&
-      password.length > 0 &&
-      oldPassword !== password
-    ) {
-      return true;
+    if (oldPassword === user.password) {
+      // if old password in field equals current password
+      return "valid";
     } else {
-      return false;
+      return "invalid";
     }
   };
   const showWarningMessage = () => {
+    // show warning if passwords are the same
     if (oldPassword.length > 0 && oldPassword === password) {
       return true;
     } else {
@@ -44,10 +42,13 @@ const EditPassword = ({ user }) => {
   };
   // for dynamic class name on input field
   const isNewPasswordValid = () => {
-    if (oldPassword === user.password) {
-      return "valid";
+    if (
+      password.length > 0 &&
+      oldPassword !== password
+    ) {
+      return true;
     } else {
-      return "invalid";
+      return false;
     }
   };
 
@@ -79,6 +80,8 @@ const EditPassword = ({ user }) => {
           <Modal.Title>Change Password</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+        
+        {/* old password */}
           <label for="old-password" className="form-label">
             Please Enter Your Old Password
           </label>
@@ -86,11 +89,12 @@ const EditPassword = ({ user }) => {
             type="password"
             id="old-password"
             required
-            className={`form-control mb-4 ${isNewPasswordValid()}`}
+            className={`form-control mb-4 ${isOldPasswordValid()}`}
             value={oldPassword}
             onChange={(e) => setOldPassword(e.target.value)}
           />
 
+          {/* new password */}
           <label for="new-password" className="form-label">
             Please Enter Your New Password
           </label>
@@ -102,6 +106,7 @@ const EditPassword = ({ user }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+
           {showWarningMessage() && (
             <span className="password-warning">
               Passwords can't be the same
@@ -116,7 +121,7 @@ const EditPassword = ({ user }) => {
           <Button
             variant="primary"
             onClick={() => editPassword(user.user_id)}
-            disabled={!isOldPasswordValid()}
+            disabled={!isNewPasswordValid()}
           >
             Save New Password
           </Button>
