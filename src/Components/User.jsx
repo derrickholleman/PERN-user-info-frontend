@@ -11,18 +11,22 @@ const User = ({ user, allUsers, setUsers }) => {
 
   return (
     <div className="m-4 user-profile">
+      <h3 className="mb-4 edit-profile">
+        Edit Profile
+        <EditButton user={user} />
+      </h3>
+      
       <div className="mb-5">
         <div>
-          <b>User:</b> {user.first_name} {user.last_name} <EditButton />
+          <b>User:</b> {user.first_name} {user.last_name}
         </div>
 
         <div>
           <b>Email:</b> {user.email}
-          <EditButton />
         </div>
 
         <div>
-          <b>Birthday:</b> {formattedBirthday} <EditButton />
+          <b>Birthday:</b> {formattedBirthday}
         </div>
 
         <div>
@@ -32,11 +36,8 @@ const User = ({ user, allUsers, setUsers }) => {
 
       <hr />
 
-      <div className='delete-edit-btns'>
-        <DeleteButton 
-        setUsers={setUsers} 
-        allUsers={allUsers} 
-        user={user} />
+      <div className="delete-edit-btns">
+        <DeleteButton setUsers={setUsers} allUsers={allUsers} user={user} />
         <EditPassword user={user} />
       </div>
     </div>
