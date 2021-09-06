@@ -26,6 +26,14 @@ form {
 .input-group {
   justify-content: space-around;
 }
+/* email form validation */
+input[type="email"]:valid:focus {
+  border: 2px solid green;
+}
+input[type="email"]:invalid:focus {
+  border: 2px solid red;
+}
+
 
 button:active {
   transform: scale(.98);
@@ -36,4 +44,28 @@ button:active {
   font-size: .8rem;
 }
 
+.users-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  width: 90%;
+  margin: 0 auto;
+}
+.user-profile {
+  border: 1px solid black;
+  padding: 10px;
+  width: 300px;
+}
+
+.delete-edit-btns {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#old-password.invalid {
+  border: 2px solid red;
+}
+#old-password.valid {
+  border: 2px solid green;
+}
 

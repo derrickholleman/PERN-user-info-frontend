@@ -1,4 +1,5 @@
 import './App.css';
+import ListUsers from './Components/ListUsers';
 import NewUserForm from './Components/NewUserForm'
 
 function App() {
@@ -9,6 +10,8 @@ function App() {
       <div className='form-container'>
         <NewUserForm />
       </div>
+
+      <ListUsers />
     </div>
   );
 }

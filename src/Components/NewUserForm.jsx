@@ -119,11 +119,14 @@ const NewUserForm = () => {
             type="date"
             className="form-control"
             id="birthday"
+            required
             value={birthday}
             onChange={(e) => setBirthday(e.target.value)}
             max={moment().format("YYYY-MM-DD")}
           />
         </div>
+
+        {/* SUBMIT BUTTON */}
         <button
           type="submit"
           className="btn btn-primary"
