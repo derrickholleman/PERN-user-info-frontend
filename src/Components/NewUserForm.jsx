@@ -105,6 +105,7 @@ const NewUserForm = () => {
             type="email"
             className="form-control"
             id="email"
+            required
             placeholder="example@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
