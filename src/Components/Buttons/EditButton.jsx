@@ -2,7 +2,7 @@ import React, {useState, Fragment} from "react";
 import { BsPencilSquare } from "react-icons/bs";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import moment from 'moment'
+import dayjs from 'dayjs'
 
 const EditButton = ({user}) => {
   const [password] = useState(user.password);
@@ -94,7 +94,7 @@ const EditButton = ({user}) => {
             required
             className={`form-control mb-4`}
             // format date so its accepted as a default value
-            value={moment(birthday).format('yyyy-MM-DD')}
+            value={dayjs(birthday).format('YYYY-MM-DD')}
             onChange={(e) => setBirthday(e.target.value)}
           />
         </Modal.Body>

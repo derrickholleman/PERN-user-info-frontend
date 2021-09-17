@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import moment from "moment";
+import dayjs from 'dayjs'
 
 const NewUserForm = () => {
   const [first_name, setFirstName] = useState("");
@@ -124,7 +124,7 @@ const NewUserForm = () => {
             required
             value={birthday}
             onChange={(e) => setBirthday(e.target.value)}
-            max={moment().format("YYYY-MM-DD")}
+            max={dayjs().format("YYYY-MM-DD")}
           />
         </div>
 

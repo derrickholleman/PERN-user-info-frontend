@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import moment from "moment";
+import dayjs from 'dayjs'
 import DeleteButton from "./Buttons/DeleteButton";
 import EditButton from "./Buttons/EditButton";
 import EditPassword from "./Buttons/EditPassword";
 
 const User = ({ user, allUsers, setUsers }) => {
   const [formattedBirthday] = useState(
-    moment(user.birthday).format("MMMM DD, YYYY")
+    dayjs(user.birthday).format("MMMM DD, YYYY")
   );
 
   return (
